@@ -1,17 +1,17 @@
-import React from "react";
 import { useQuery } from "react-query";
 import { getPokemon } from "../../api/getPokemon";
 import { Pokemon } from "../../models/pokemon";
 import notFound from "../../assets/psyduck-confused.gif";
 import Spinner from "../Spinner";
 import { PokemonType } from "../../models/pokemon-type";
+import Typography from "@mui/material/Typography";
+import { useParams } from "react-router-dom";
 
 const PokemonDetail = () => {
-  const pathname = window.location.pathname;
-  const search = pathname.replace("/", "") || 1;
+  const { pokemonId } = useParams<{ pokemonId: string }>();
 
-  const { isLoading, error, data } = useQuery<Pokemon>("pokeData", () =>
-    getPokemon(search)
+  const { isLoading, error, data } = useQuery<Pokemon>("pokemonDetail", () =>
+    getPokemon(pokemonId)
   );
 
   const navigate = (id: number, direction: string) => {
@@ -22,7 +22,7 @@ const PokemonDetail = () => {
   if (error) {
     return (
       <div>
-        <img src={notFound}></img>
+        <img src={notFound} alt="Not Found"></img>
         <p>Not Found</p>
       </div>
     );
@@ -35,7 +35,13 @@ const PokemonDetail = () => {
   return data ? (
     <div className="App">
       <header className="App-header"></header>
-      <h2 className="capitalize">{data.name}</h2>
+      <Typography
+        className="pokemon-name"
+        variant="h2"
+        sx={{ textTransform: "capitalize" }}
+      >
+        {data.name}
+      </Typography>
       <p>#{data.id}</p>
       <p>
         Types:

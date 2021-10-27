@@ -12,7 +12,7 @@ interface PokemonResponse {
 }
 
 export const getPokemon = async (nameOrId: string | number) => {
-  const pokemon = await axios
+  return await axios
     .get<PokemonResponse>(`${POKEAPI_URL}/${nameOrId}`)
     .then((res) => {
       const { data } = res;
@@ -26,6 +26,4 @@ export const getPokemon = async (nameOrId: string | number) => {
         types: data.types.map((t) => t.type),
       } as Pokemon;
     });
-
-  return pokemon;
 };
