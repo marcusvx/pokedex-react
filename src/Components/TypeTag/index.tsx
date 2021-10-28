@@ -1,8 +1,21 @@
 import { Tag } from "react-bulma-components";
 import { PokemonType } from "../../models/pokemon-type";
+import { COLORS } from "../../utils/type-colors";
 
-const TypeTag = ({ name }: PokemonType) => {
-  return <Tag className="is-capitalized mr-1">{name}</Tag>;
+const TypeTag = ({ types }: { types: PokemonType[] }) => {
+  return (
+    <>
+      {types.map(({ name }) => (
+        <Tag
+          key={name}
+          style={{ backgroundColor: COLORS[name], color: "#fff" }}
+          className="is-capitalized mr-1"
+        >
+          {name}
+        </Tag>
+      ))}
+    </>
+  );
 };
 
 export default TypeTag;

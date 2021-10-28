@@ -10,6 +10,7 @@ import {
   Media,
 } from "react-bulma-components";
 import TypeTag from "../TypeTag";
+import PokemonCard from "../PokemonCard";
 
 const PokemonList = () => {
   const { isLoading, error, data } = useQuery("pokemonList", () =>
@@ -26,27 +27,9 @@ const PokemonList = () => {
   return data ? (
     <Container>
       <Columns>
-        {data.map(({ name, id, types }: PokemonListItem) => (
+        {data.map(({ id, name, types }: PokemonListItem) => (
           <Columns.Column key={id}>
-            <Card style={{ width: 300 }} className="is-clickable">
-              <Card.Content>
-                <Media>
-                  <Media.Item>
-                    <Heading className="is-capitalized" size={5}>
-                      {name}
-                    </Heading>
-                    <Heading subtitle size={6}>
-                      {types.map((type) => (
-                        <TypeTag name={type.name}></TypeTag>
-                      ))}
-                    </Heading>
-                  </Media.Item>
-                  <Media.Item align="right">
-                    <Image size={96} src={`sprites/${name}.png`} alt={name} />
-                  </Media.Item>
-                </Media>
-              </Card.Content>
-            </Card>
+            <PokemonCard id={id} name={name} types={types}></PokemonCard>
           </Columns.Column>
         ))}
       </Columns>

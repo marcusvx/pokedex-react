@@ -3,20 +3,20 @@ import { getPokemon } from "../../api/getPokemon";
 import { Pokemon } from "../../models/pokemon";
 import notFound from "../../assets/psyduck-confused.gif";
 import Spinner from "../Spinner";
-import { PokemonType } from "../../models/pokemon-type";
-import Typography from "@mui/material/Typography";
-import { useParams } from "react-router-dom";
+import { Link, useHistory, useParams } from "react-router-dom";
+import { Box, Button, Container, Heading, Level } from "react-bulma-components";
+import TypeTag from "../TypeTag";
 
 const PokemonDetail = () => {
   const { pokemonId } = useParams<{ pokemonId: string }>();
-
-  const { isLoading, error, data } = useQuery<Pokemon>("pokemonDetail", () =>
-    getPokemon(pokemonId)
+  const history = useHistory();
+  const { isLoading, error, data } = useQuery<Pokemon>(
+    ["pokemonDetail", pokemonId],
+    () => getPokemon(pokemonId)
   );
 
-  const navigate = (id: number, direction: string) => {
-    const path = direction === "next" ? id + 1 : id - 1;
-    window.location.replace(window.location.origin + `/${path}`);
+  const handleClick = async (id: number) => {
+    history.push(`/pokemon/${id}`);
   };
 
   if (error) {
@@ -33,36 +33,46 @@ const PokemonDetail = () => {
   }
 
   return data ? (
-    <div className="App">
-      <header className="App-header"></header>
-      <Typography
-        className="pokemon-name"
-        variant="h2"
-        sx={{ textTransform: "capitalize" }}
-      >
-        {data.name}
-      </Typography>
-      <p>#{data.id}</p>
-      <p>
-        Types:
-        <ul>
-          {data.types.map((t: PokemonType) => (
-            <li>{t.name}</li>
-          ))}
-        </ul>
-      </p>
-      <div>
-        {isLoading ? (
-          "Carregando"
-        ) : (
-          <img src={data.artwork.frontDefault} alt={data.name}></img>
-        )}
-      </div>
-      <button onClick={() => navigate(data.id, "previous")}>
-        {"<"} Previous
-      </button>
-      <button onClick={() => navigate(data.id, "next")}>Next {">"}</button>
-    </div>
+    <Container>
+      <Box>
+        <Heading className="is-capitalized">{data.name}</Heading>
+        <Heading subtitle>No. {data.id}</Heading>
+        <div>
+          <TypeTag types={data.types}></TypeTag>
+          <div>
+            {isLoading ? (
+              "Carregando"
+            ) : (
+              <img src={data.artwork.frontDefault} alt={data.name}></img>
+            )}
+          </div>
+        </div>
+      </Box>
+      <Box>
+        <Level>
+          <Level.Side>
+            <Level.Item>
+              <Button
+                className="button"
+                onClick={() => handleClick(data.id - 1)}
+              >
+                {"<"} Previous
+              </Button>
+            </Level.Item>
+          </Level.Side>
+          <Level.Side align="right">
+            <Level.Item>
+              <Button
+                className="button"
+                onClick={() => handleClick(data.id + 1)}
+              >
+                Next {">"}
+              </Button>
+            </Level.Item>
+          </Level.Side>
+        </Level>
+      </Box>
+    </Container>
   ) : null;
 };
 

@@ -15,7 +15,7 @@ interface PokemonListResponse {
 
 export const getPokemonList = async (
   name: string = "",
-  limit: number = 20,
+  limit: number = 150,
   offset: number = 0
 ) => {
   const result = await graphQLClient

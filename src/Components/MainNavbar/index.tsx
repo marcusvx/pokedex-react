@@ -3,7 +3,7 @@ import Pokeball from "../../assets/pokeball.png";
 const MainNavbar = () => (
   <Navbar>
     <Navbar.Brand>
-      <Navbar.Item href="#">
+      <Navbar.Item href="/">
         <img alt="Simple Pokédex" src={Pokeball} />
       </Navbar.Item>
       <Navbar.Burger />
