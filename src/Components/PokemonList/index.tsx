@@ -18,9 +18,9 @@ const PokemonList = () => {
 
   return data ? (
     <Container>
-      <Columns>
+      <Columns className="is-centered is-mobile">
         {data.map(({ id, name, types }: PokemonListItem) => (
-          <Columns.Column key={id}>
+          <Columns.Column key={id} className="is-narrow">
             <PokemonCard id={id} name={name} types={types}></PokemonCard>
           </Columns.Column>
         ))}
