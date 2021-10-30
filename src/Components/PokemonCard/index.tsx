@@ -1,15 +1,6 @@
-import {
-  Card,
-  Columns,
-  Container,
-  Heading,
-  Image,
-  Media,
-} from "react-bulma-components";
+import { Card, Image, Media } from "react-bulma-components";
 import TypeTag from "../TypeTag";
-import { PokemonListItem } from "../../models/pokemon-list-item";
 import { PokemonType } from "../../models/pokemon-type";
-import { COLORS } from "../../utils/type-colors";
 import { Link } from "react-router-dom";
 
 interface PokemonItemProps {

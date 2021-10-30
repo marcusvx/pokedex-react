@@ -1,15 +1,7 @@
 import { getPokemonList } from "../../api/getPokemonList";
 import { useQuery } from "react-query";
 import { PokemonListItem } from "../../models/pokemon-list-item";
-import {
-  Card,
-  Columns,
-  Container,
-  Heading,
-  Image,
-  Media,
-} from "react-bulma-components";
-import TypeTag from "../TypeTag";
+import { Columns, Container } from "react-bulma-components";
 import PokemonCard from "../PokemonCard";
 
 const PokemonList = () => {

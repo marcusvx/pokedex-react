@@ -3,7 +3,7 @@ import { getPokemon } from "../../api/getPokemon";
 import { Pokemon } from "../../models/pokemon";
 import notFound from "../../assets/psyduck-confused.gif";
 import Spinner from "../Spinner";
-import { Link, useHistory, useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { Box, Button, Container, Heading, Level } from "react-bulma-components";
 import TypeTag from "../TypeTag";
 
@@ -34,7 +34,7 @@ const PokemonDetail = () => {
 
   return data ? (
     <Container>
-      <Box>
+      <Box backgroundColor="white-bis"    >
         <Heading className="is-capitalized">{data.name}</Heading>
         <Heading subtitle>No. {data.id}</Heading>
         <div>

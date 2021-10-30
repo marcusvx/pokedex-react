@@ -1,4 +1,3 @@
-import axios from "axios";
 import { PokemonListItem } from "../models/pokemon-list-item";
 import { GraphQLClient, gql } from "graphql-request";
 
