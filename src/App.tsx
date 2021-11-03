@@ -1,8 +1,8 @@
-import MainNavbar from "./components/MainNavbar";
-import PokemonDetail from "./components/PokemonDetail";
+import MainNavbar from "./Components/MainNavbar";
+import PokemonDetail from "./Components/PokemonDetail";
 import "./App.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import PokemonList from "./components/PokemonList";
+import PokemonList from "./Components/PokemonList";
 import "bulma/css/bulma.min.css";
 
 const App = () => {
